@@ -455,6 +455,7 @@ macfilter(){
 	[ -z "$dhcpdir" ] && [ -f /var/lib/dhcpd/dhcpd.leases ] && dhcpdir='/var/lib/dhcpd/dhcpd.leases'
 	[ -z "$dhcpdir" ] && [ -f /tmp/dhcp.leases ] && dhcpdir='/tmp/dhcp.leases'
 	[ -z "$dhcpdir" ] && [ -f /tmp/dnsmasq.leases ] && dhcpdir='/tmp/dnsmasq.leases'
+	[ -z "$dhcpdir" ] && [ -f /var/lib/misc/dnsmasq.leases ] && dhcpdir='/var/lib/misc/dnsmasq.leases'
 	[ -z "$dhcpdir" ] && dhcpdir='/dev/null'
 	[ -z "$macfilter_type" ] && macfilter_type='黑名单' 
 	if [ "$macfilter_type" = "黑名单" ];then
@@ -1563,7 +1564,6 @@ case "$1" in
 			$clashdir/start.sh stop
 			$clashdir/start.sh cronset "clash服务"
 			$clashdir/start.sh cronset "订阅链接"
-			$clashdir/start.sh cronset "ShellClash初始化"
 			[ -w ~/.bashrc ] && profile=~/.bashrc
 			[ -w /etc/profile ] && profile=/etc/profile
 			sed -i '/alias clash=*/'d $profile
